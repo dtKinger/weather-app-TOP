@@ -1,2 +1,2 @@
-# weather-app-TOP
-An API project - weather app for The Odin Project
+# My Weather App
+An API project - a weather app for The Odin Project
