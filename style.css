@@ -17,6 +17,8 @@ div{
 
 
  :root {
+  --background-cloudy: url("camille-couvez-unsplash.jpg");
+
   --color-bg-primary: ivory;
   --color-bg-secondary: rgb(56, 56, 56);
   --color-text-primary: rgb(56, 56, 56);
@@ -58,9 +60,11 @@ div{
 
 body {
   font-family: 'Quicksand', sans-serif;
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
+  color: var(--color-text-secondary);
+  /* background-color: var(--color-bg-primary); */
   box-sizing: border-box;
+  background-image: var(--background-cloudy);
+  background-size: cover;
 }
 
 h1{
@@ -92,18 +96,29 @@ header, footer {
   padding: 10px;
 }
 
+ul {
+  list-style: none;
+}
+
+li {
+  padding: 4px 8px;
+}
+
 header {
   min-height: var(--section-height-header);
+  background-color: transparent;
 }
 
 footer {
   min-height: var(--section-height-footer);  
   padding: auto 0; 
+  background-color: transparent;
 }
 
 main {
   min-height: var(--section-height-main);
   padding: 20px;
+  
 }
 
 /* Will need to replace the OS styles */
@@ -229,7 +244,7 @@ a:hover{
 }
 
 .output {
-  background-color: white;
+  background-color: transparent;
   border: 1px solid grey;
   max-width: 80%;
   min-height: 80px;

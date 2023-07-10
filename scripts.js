@@ -16,12 +16,12 @@ searchBtn.addEventListener('click', (e) => {
 
 ////////////
 
-let keepers = [0,2];
+let keepers = [1,2];
 const fakeResponse = [["hello", "there"], ["goodbye", "to you"], ["how", "are you?"]]
-let filtered = fakeResponse.filter((item, index) => keepers.includes(index))
+let filtered = fakeResponse.filter((item, index) => keepers.includes(index));
 
 // newArr = fakeResponse.filter(compareArrays);
-console.log(filtered)
+console.table(filtered)
 // How to populate newArr with items values of the keepers array?
 
 
