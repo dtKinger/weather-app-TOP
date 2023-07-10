@@ -16,9 +16,16 @@ searchBtn.addEventListener('click', (e) => {
 
 ////////////
 
-// Get user's current city
+let keepers = [0,2];
+const fakeResponse = [["hello", "there"], ["goodbye", "to you"], ["how", "are you?"]]
+let filtered = fakeResponse.filter((item, index) => keepers.includes(index))
 
-// Load data based on that.
+// newArr = fakeResponse.filter(compareArrays);
+console.log(filtered)
+// How to populate newArr with items values of the keepers array?
+
+
+
 
 async function fetchWeather (search) {
   try {
