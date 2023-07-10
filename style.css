@@ -103,6 +103,7 @@ footer {
 
 main {
   min-height: var(--section-height-main);
+  padding: 20px;
 }
 
 /* Will need to replace the OS styles */
@@ -227,5 +228,14 @@ a:hover{
   border-radius: 5px;
 }
 
-.card p {
+.output {
+  background-color: white;
+  border: 1px solid grey;
+  max-width: 80%;
+  min-height: 80px;
+}
+
+.current-city {
+  font-size: 1.25em;
+  color: greenyellow;
 }
