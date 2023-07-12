@@ -254,3 +254,7 @@ a:hover{
   font-size: 1.25em;
   color: greenyellow;
 }
+
+.weather-item {
+  color: red;
+}
