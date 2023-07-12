@@ -14,10 +14,21 @@ const li = document.createElement('li');
 
 let lastCity;
 
-function checkCity () {
-  fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_DYz26g8fZ1f0JCkR3fPch5oYXO730")
-  .then(response => response.json())
-  .then(data => console.log(data.location.city))
+async function checkCity () {
+  try { 
+    let ipResponse = await fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_DYz26g8fZ1f0JCkR3fPch5oYXO730")
+    let ipData = await ipResponse.json();
+    console.log(ipData.location.city)
+    console.log(ipData.ip);
+    let guessLocalWeather = await fetch(`http://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${ipData.location.city}`, {mode: 'cors'});
+    let response = await guessLocalWeather.json()
+
+    renderWeather(response);
+    
+    
+  } catch (err) {
+    console.log(err);
+  }
 }
 checkCity();
 
@@ -34,32 +45,14 @@ searchBtn.addEventListener('click', (e) => {
 
 async function fetchWeather (search) {
   try {
+    console.log(`${checkCity.guessData}`);
+    
     const WEATHER_DATA = await fetch(`http://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${search}`, {mode: 'cors'})
     let response = await WEATHER_DATA.json()
     lastCity = response.location.name;
     CURRENT_CITY.textContent = `${lastCity}`;
 
-    // Filter the response for items I want
-    let dkWeatherObj = takeSubset(response);
-
-
-    
-    // Render as needed
-    CURRENT_CITY.textContent = `${dkWeatherObj.myFormat.city}`
-    
-    let weatherReport = ul;
-    weatherReport.innerHTML = ''; // Dump before generating
-    let weatherData;
-    Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
-      if (entry[1] != ''){ // If it has a value
-        let item = document.createElement('li');
-        item.classList = 'weather-item';
-        item.textContent = `${entry[0]}: ${entry[1]}`;
-        console.log(item)
-        weatherReport.appendChild(item);
-      }
-    })
-    OUTPUT.append(weatherReport);
+    renderWeather(response);
     
     } catch (err) {
       handleError(err);
@@ -114,6 +107,28 @@ function takeSubset (response) {
     );
 
     return { myFormat };
+}
+
+function renderWeather (response) {
+  // Filter the response for items I want
+  let dkWeatherObj = takeSubset(response);
+
+  // Render as needed
+  CURRENT_CITY.textContent = `${dkWeatherObj.myFormat.city}`
+  
+  let weatherReport = ul;
+  weatherReport.innerHTML = ''; // Dump before generating
+  let weatherData;
+  Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
+    if (entry[1] != ''){ // If it has a value
+      let item = document.createElement('li');
+      item.classList = 'weather-item';
+      item.textContent = `${entry[0]}: ${entry[1]}`;
+      console.log(item)
+      weatherReport.appendChild(item);
+    }
+  })
+  OUTPUT.append(weatherReport);
 }
 
 // make a safe function with a HOF
