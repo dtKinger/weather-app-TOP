@@ -14,6 +14,14 @@ const li = document.createElement('li');
 
 let lastCity;
 
+function checkCity () {
+  fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_DYz26g8fZ1f0JCkR3fPch5oYXO730")
+  .then(response => response.json())
+  .then(data => console.log(data.location.city))
+}
+checkCity();
+
+
 searchBtn.addEventListener('click', (e) => {
   e.preventDefault();
   let search = searchField.value;
@@ -33,24 +41,23 @@ async function fetchWeather (search) {
 
     // Filter the response for items I want
     let dkWeatherObj = takeSubset(response);
+
+
+    
     // Render as needed
     CURRENT_CITY.textContent = `${dkWeatherObj.myFormat.city}`
-    OUTPUT.innerHTML = ''; // Dump before generating
-    
-    // for (const key in dkWeatherObj.myFormat) {
-    //   if (dkWeatherObj.myFormat.hasOwnProperty(key)){
-    //     console.log(`${key}: ${dkWeatherObj.myFormat[key]}`)
-    //   }
-    // }
     
     let weatherReport = ul;
+    weatherReport.innerHTML = ''; // Dump before generating
     let weatherData;
     Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
-      let item = document.createElement('li');
-      item.classList = 'weather-item';
-      item.textContent = `${entry[0]}: ${entry[1]}`;
-      console.log(item)
-      weatherReport.appendChild(item);
+      if (entry[1] != ''){ // If it has a value
+        let item = document.createElement('li');
+        item.classList = 'weather-item';
+        item.textContent = `${entry[0]}: ${entry[1]}`;
+        console.log(item)
+        weatherReport.appendChild(item);
+      }
     })
     OUTPUT.append(weatherReport);
     
