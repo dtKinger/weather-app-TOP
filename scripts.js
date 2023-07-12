@@ -121,11 +121,19 @@ function renderWeather (response) {
   let weatherData;
   Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
     if (entry[1] != ''){ // If it has a value
+      if (entry[0] == 'conditionIcon'){
+        let item = document.createElement('li');
+        item.classList = 'weather-item';
+        item.innerHTML = `${entry[0]}: <span><img src="https:${entry[1]}"></span>`;
+        console.log(item)
+        weatherReport.appendChild(item);
+      } else {
       let item = document.createElement('li');
       item.classList = 'weather-item';
       item.textContent = `${entry[0]}: ${entry[1]}`;
       console.log(item)
       weatherReport.appendChild(item);
+      }
     }
   })
   OUTPUT.append(weatherReport);
