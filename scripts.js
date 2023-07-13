@@ -30,7 +30,7 @@ async function checkCity () {
     console.log(err);
   }
 }
-checkCity();
+// checkCity(); Disable this while building - 836 requests left
 
 
 searchBtn.addEventListener('click', (e) => {
@@ -116,27 +116,12 @@ function renderWeather (response) {
   // Render as needed
   CURRENT_CITY.textContent = `${dkWeatherObj.myFormat.city}`
   
-  let weatherReport = ul;
-  weatherReport.innerHTML = ''; // Dump before generating
-  let weatherData;
   Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
     if (entry[1] != ''){ // If it has a value
-      if (entry[0] == 'conditionIcon'){
-        let item = document.createElement('li');
-        item.classList = 'weather-item';
-        item.innerHTML = `${entry[0]}: <span><img src="https:${entry[1]}"></span>`;
-        console.log(item)
-        weatherReport.appendChild(item);
-      } else {
-      let item = document.createElement('li');
-      item.classList = 'weather-item';
-      item.textContent = `${entry[0]}: ${entry[1]}`;
-      console.log(item)
-      weatherReport.appendChild(item);
-      }
+      
+      console.log(`${entry[0]}: ${entry[1]}`)
     }
   })
-  OUTPUT.append(weatherReport);
 }
 
 // make a safe function with a HOF
@@ -159,3 +144,37 @@ function handleError(err) {
  /* ===================== \
 | END HOISTED DECLARATIONS |
  \  ==================== */
+
+ // OLD WAY
+//  function renderWeather (response) {
+//   // Filter the response for items I want
+//   let dkWeatherObj = takeSubset(response);
+
+//   // Render as needed
+//   CURRENT_CITY.textContent = `${dkWeatherObj.myFormat.city}`
+  
+//   // let weatherReport = ul;
+//   // weatherReport.innerHTML = ''; // Dump before generating
+//   // let weatherData;
+//   Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
+//     if (entry[1] != ''){ // If it has a value
+      
+//       console.log(`${entry[0]}: ${entry[1]}`)
+      
+//       // if (entry[0] == 'conditionIcon'){
+//       //   let item = document.createElement('li');
+//       //   item.classList = 'weather-item';
+//       //   item.innerHTML = `${entry[0]}: <span><img src="https:${entry[1]}"></span>`;
+//       //   console.log(item)
+//       //   weatherReport.appendChild(item);
+//       // } else {
+//       // let item = document.createElement('li');
+//       // item.classList = 'weather-item';
+//       // item.textContent = `${entry[0]}: ${entry[1]}`;
+//       // console.log(item)
+//       // weatherReport.appendChild(item);
+//       // }
+//     }
+//   })
+//   OUTPUT.append(weatherReport);
+// }
