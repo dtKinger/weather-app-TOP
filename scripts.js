@@ -32,7 +32,7 @@ async function checkCity () {
   try { 
     let ipResponse = await fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_DYz26g8fZ1f0JCkR3fPch5oYXO730")
     let ipData = await ipResponse.json();
-    let cityToQuery = ipData.location.city.normalize()
+    let cityToQuery = ipData.location.city.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     let guessLocalWeather = await fetch(`https://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${cityToQuery}`, {mode: 'cors'});
     let response = await guessLocalWeather.json()
 
@@ -50,7 +50,8 @@ checkCity(); // Disable this while building - 836 requests left
 
 searchBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  let search = searchField.value;
+  let search = searchField.value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  console.log(search);
   lastCity = search;
   if (FORM.checkValidity()){   
     fetchWeather(search);
