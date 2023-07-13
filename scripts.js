@@ -27,12 +27,10 @@ let lastCity;
 
 async function checkCity () {
   try { 
-    // let ipResponse = await fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_DYz26g8fZ1f0JCkR3fPch5oYXO730")
-    let ipResponse = await fetch(`http://api.weatherapi.com/v1/ip.json?key=2218275108374adfbec63623230807&q=${ipData.location.city}`, {mode: 'cors'})
+    let ipResponse = await fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_DYz26g8fZ1f0JCkR3fPch5oYXO730")
     let ipData = await ipResponse.json();
-    console.log(ipData.location.city)
-    console.log(ipData.ip);
-    let guessLocalWeather = await fetch(`http://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${ipData.location.city}`, {mode: 'cors'});
+    let cityToQuery = ipData.location.city.normalize()
+    let guessLocalWeather = await fetch(`http://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${cityToQuery}`, {mode: 'cors'});
     let response = await guessLocalWeather.json()
 
     renderWeather(response);
@@ -42,7 +40,7 @@ async function checkCity () {
     console.log(err);
   }
 }
-// checkCity(); Disable this while building - 836 requests left
+checkCity(); // Disable this while building - 836 requests left
 
 
 searchBtn.addEventListener('click', (e) => {
@@ -57,8 +55,6 @@ searchBtn.addEventListener('click', (e) => {
 
 async function fetchWeather (search) {
   try {
-    console.log(`${checkCity.guessData}`);
-    
     
     const WEATHER_DATA = await fetch(`http://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${search}`, {mode: 'cors'})
     let response = await WEATHER_DATA.json()
@@ -108,19 +104,18 @@ function setBackgroundImage (dkWeatherObj) {
   outer:
   if (dkWeatherObj.myFormat.isDay == 0){
     BODY.style.backgroundImage = 'var(--background-night';
-    break outer;
-  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase() == 'clear'){
-    BODY.style.backgroundImage = 'var(--background-clear)';
-  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase() == 'sunny'){
+  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase().includes('snow')){
+    BODY.style.backgroundImage = 'var(--background-snow)';
+  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase().includes('clear')){
     BODY.style.backgroundImage = 'var(--background-sunny)';
-  } else if(dkWeatherObj.myFormat.conditionText.toLowerCase() == 'partly cloudy'){
-    BODY.style.backgroundImage = 'var(--background-partly-cloudy)';
-  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase() == 'cloudy' ||
-  dkWeatherObj.myFormat.conditionText.toLowerCase() == 'Overcast') {
+  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase().includes('sunny')){
+    BODY.style.backgroundImage = 'var(--background-sunny)';
+  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase().includes('cloud') ||
+  dkWeatherObj.myFormat.conditionText.toLowerCase() == 'overcast') {
     BODY.style.backgroundImage = 'var(--background-cloudy)';
-  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase() == 'rainy') {
-    BODY.style.backgroundImage = 'var(--background-rainy)';
-  }else {
+  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase().includes('rain')) {
+    BODY.style.backgroundImage = 'var(--background-rain)';
+  } else {
 
   };
 };

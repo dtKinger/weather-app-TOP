@@ -23,7 +23,7 @@ div{
   --background-sunny: url("./charles-lebegue-unsplash-sunny.jpg");
   --background-night: url("./sanket-kumbhar-unsplash-night.jpg");
   --background-rain: url("./valentin-muller-unsplash-rainy.jpg");
-  --background-clear: url("./charles-lebegue-unsplash-sunny.jpg");
+  --background-snow: url("./damian-mccoig-unsplash-snow.jpg");
   
 
   --color-bg-primary: ivory;
@@ -71,7 +71,7 @@ body {
   /* background-color: var(--color-bg-primary); */
   box-sizing: border-box;
   background-image: var(--background-cloudy);
-  background-size: cover;
+  /* background-size: cover; */
   text-shadow: 2px 2px black;
 }
 
@@ -100,17 +100,9 @@ header, footer {
   justify-content: space-between;
   align-items: center;
   color: var(--color-text-secondary);
-  background-color: var(--color-bg-secondary);
   padding: 10px;
 }
 
-ul {
-  list-style: none;
-}
-
-li {
-  padding: 4px 8px;
-}
 
 header {
   min-height: var(--section-height-header);
@@ -121,6 +113,15 @@ footer {
   min-height: var(--section-height-footer);  
   padding: auto 0; 
   background-color: transparent;
+}
+
+
+ul {
+  list-style: none;
+}
+
+li {
+  padding: 4px 8px;
 }
 
 main {
@@ -270,6 +271,7 @@ a:hover{
 .clock {
   font-size: 1em;
   margin-bottom: 30px;
+  justify-content: center;
 }
 
 .local-time {
