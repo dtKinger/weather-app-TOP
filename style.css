@@ -132,6 +132,11 @@ main {
 /* Will need to replace the OS styles */
 input{
   appearance: none;
+  min-height: 3em;
+}
+
+input::placeholder{
+  padding: 4px 8px;
 }
 
 input[type="checkbox"]{
@@ -253,21 +258,68 @@ a:hover{
 
 .output {
   background-color: transparent;
-  border: 1px solid grey;
-  max-width: 80%;
+  max-width: 90%;
   min-height: 80px;
+  margin: 0 auto;
+  display: flex;  
+  text-align: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.clock {
+  font-size: 1em;
+  margin-bottom: 30px;
+}
+
+.local-time {
+  font-size: 3em;
 }
 
 .current-city {
+  display: inline-block;
   font-size: 1.25em;
   color: rgb(218, 255, 71);
   /* text-shadow: 0px 0px 2px black; */
 }
 
-.weather-item {
-  color: red;
+.weather-icon {
+  width: 60px;
+  height: 60px;
+  top: -10px;
+}
+
+.current-container{
+  justify-content: center;
+  display: flex;
+  min-width: 250px;
 }
 
 .current-weather-title {
   /* text-shadow: 0px 0px 2px black; */
+  position: relative;
+}
+
+.city-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.city-search > * {
+  max-width: 300px;
+}
+
+#submit {
+  margin-bottom: 30px;
+}
+
+.output-item {
+  flex: 1;
+  min-width: 120px;
+}
+
+.metric-data {
+  font-size: 2em;
 }

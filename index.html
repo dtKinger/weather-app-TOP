@@ -13,16 +13,35 @@
     <h1>Weather P4GES</h1>
   </header>
   <main>
-    <form action="#">
+    <form class="city-search" action="#">
       <label for="search"></label>
       <input type="search" id="search" placeholder="Check a city...">
       <button for="search" id="submit" type="submit">Search</button>
     </form>
-    <h2>JSON Response</h2>
-    <h3 class="current-weather-title">Current weather in <span class="current-city"></span></h3>
+    <div class="current-container">
+      <h3 class="current-weather-title">Current weather in <span class="current-city"></span> is</h3><span class="weather-icon" alt="" title=""></span>
+    </div>
+    <h3 class="clock">Current time is <span class="local-time"></span></h3>
     <div class="output">
-      
-
+      <div class="output-item current-temp">
+        <p class="metric-title">Current Temp</p>
+        <p class="metric-data"></p>
+      </div>
+      <div class="output-item feels-like">
+        <p class="metric">Feels like</p>
+        <p class="metric-data"></p>
+      </div>
+      <div class="output-item uv-index">
+        <p class="metric">UV Index</p>
+        <p class="metric-data"></p>
+      </div>
+      <div class="output-item wind-speed">
+        <p class="metric">Wind Speed</p>
+        <p class="metric-data"></p></div>
+      <div class="output-item humidity">
+        <p class="metric">Humidity</p>
+        <p class="metric-data"></p>
+      </div>
     </div>
   </main>
   <footer>

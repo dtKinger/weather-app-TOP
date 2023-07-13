@@ -6,6 +6,15 @@ const OUTPUT = document.querySelector('.output');
 const CURRENT_CITY = document.querySelector('.current-city');
 const newLine = document.createElement('br');
 const CURRENT_WEATHER_TITLE = document.querySelector('.current-weather-title');
+const WEATHER_ICON = document.querySelector('.weather-icon');
+
+const LOCAL_TIME = document.querySelector('.local-time');
+const UV = document.querySelector('.uv-index > .metric-data');
+const CURRENT_TEMP = document.querySelector('.current-temp > .metric-data');
+const FEELS_LIKE = document.querySelector('.feels-like > .metric-data');
+const WIND_SPEED = document.querySelector('.wind-speed > .metric-data');
+const HUMIDITY = document.querySelector('.humidity > .metric-data');
+
 
 const h2 = document.createElement('h2');
 const div = document.createElement('div');
@@ -75,14 +84,24 @@ function renderWeather (response) {
 
   // Render as needed
   CURRENT_CITY.textContent = `${dkWeatherObj.myFormat.city}`
+  WEATHER_ICON.innerHTML = `
+  <img src="https:${dkWeatherObj.myFormat.conditionIcon}">
+  `
   setBackgroundImage(dkWeatherObj);
+
+  LOCAL_TIME.textContent = `${dkWeatherObj.myFormat.localTime}`;
+  UV.textContent = `${dkWeatherObj.myFormat.uv} / 13`;
+  CURRENT_TEMP.textContent = `${dkWeatherObj.myFormat.currentTemp} °C`;
+  FEELS_LIKE.textContent = `${dkWeatherObj.myFormat.feelsLike} °C`;
+  WIND_SPEED.textContent = `${dkWeatherObj.myFormat.windKph} kp/h`;
+  HUMIDITY.textContent = `${dkWeatherObj.myFormat.humidity} %`;
   
-  Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
-    if (entry[1] != ''){ // If it has a value
+  // Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
+  //   if (entry[1] != ''){ // If it has a value
       
-      console.log(`${entry[0]}: ${entry[1]}`)
-    }
-  })
+  //     console.log(`${entry[0]}: ${entry[1]}`)
+  //   }
+  // })
 }
 
 function setBackgroundImage (dkWeatherObj) {
@@ -174,37 +193,3 @@ function handleError(err) {
  /* ===================== \
 | END HOISTED DECLARATIONS |
  \  ==================== */
-
- // OLD WAY
-//  function renderWeather (response) {
-//   // Filter the response for items I want
-//   let dkWeatherObj = takeSubset(response);
-
-//   // Render as needed
-//   CURRENT_CITY.textContent = `${dkWeatherObj.myFormat.city}`
-  
-//   // let weatherReport = ul;
-//   // weatherReport.innerHTML = ''; // Dump before generating
-//   // let weatherData;
-//   Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
-//     if (entry[1] != ''){ // If it has a value
-      
-//       console.log(`${entry[0]}: ${entry[1]}`)
-      
-//       // if (entry[0] == 'conditionIcon'){
-//       //   let item = document.createElement('li');
-//       //   item.classList = 'weather-item';
-//       //   item.innerHTML = `${entry[0]}: <span><img src="https:${entry[1]}"></span>`;
-//       //   console.log(item)
-//       //   weatherReport.appendChild(item);
-//       // } else {
-//       // let item = document.createElement('li');
-//       // item.classList = 'weather-item';
-//       // item.textContent = `${entry[0]}: ${entry[1]}`;
-//       // console.log(item)
-//       // weatherReport.appendChild(item);
-//       // }
-//     }
-//   })
-//   OUTPUT.append(weatherReport);
-// }
