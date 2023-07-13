@@ -67,7 +67,6 @@ async function fetchWeather (search) {
     
     const WEATHER_DATA = await fetch(`http://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${search}`, {mode: 'cors'})
     let response = await WEATHER_DATA.json()
-    console.log(response);
     lastCity = response.location.name;
     CURRENT_CITY.textContent = `${lastCity}`;
 
@@ -103,12 +102,6 @@ function renderWeather (response) {
   WIND_SPEED.textContent = `${dkWeatherObj.myFormat.windKph} kph`;
   HUMIDITY.textContent = `${dkWeatherObj.myFormat.humidity} %`;
   
-  // Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
-  //   if (entry[1] != ''){ // If it has a value
-      
-  //     console.log(`${entry[0]}: ${entry[1]}`)
-  //   }
-  // })
 }
 
 function setBackgroundImage (dkWeatherObj) {
@@ -188,7 +181,6 @@ function makeSafe(fn, errorHandler) {
 
 // Credit Wes Bos
 function handleError(err) {
-  console.log('Ohhhh nooo');
   console.log(err);
   // end of credit :')
   if (response.error.message){
