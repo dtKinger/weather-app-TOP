@@ -51,7 +51,6 @@ checkCity(); // Disable this while building - 836 requests left
 searchBtn.addEventListener('click', (e) => {
   e.preventDefault();
   let search = searchField.value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  console.log(search);
   lastCity = search;
   if (FORM.checkValidity()){   
     fetchWeather(search);
