@@ -15,6 +15,9 @@ const FEELS_LIKE = document.querySelector('.feels-like > .metric-data');
 const WIND_SPEED = document.querySelector('.wind-speed > .metric-data');
 const HUMIDITY = document.querySelector('.humidity > .metric-data');
 
+const LOADER = document.querySelector('.loader');
+const LOADED_CONTENT = document.querySelector('.loaded-content');
+
 
 const h2 = document.createElement('h2');
 const div = document.createElement('div');
@@ -34,6 +37,8 @@ async function checkCity () {
     let response = await guessLocalWeather.json()
 
     renderWeather(response);
+    LOADER.classList.add('hide');
+    LOADED_CONTENT.classList.remove('hide');
     
     
   } catch (err) {

@@ -18,29 +18,36 @@
       <input type="search" id="search" placeholder="Check a city..." required minlength="2" maxlength="30">
       <button for="search" id="submit" type="submit">Search</button>
     </form>
-    <div class="current-container">
-      <h3 class="current-weather-title">Weather in <span class="current-city"></span> is</h3><span class="weather-icon" alt="" title=""></span>
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+      </svg>
     </div>
-    <h3 class="clock">Local time is <span class="local-time"></span></h3>
-    <div class="output">
-      <div class="output-item current-temp">
-        <p class="metric-title">Current Temp</p>
-        <p class="metric-data"></p>
+    <div class="loaded-content hide">
+      <div class="current-container">
+        <h3 class="current-weather-title">Weather in <span class="current-city"></span> is</h3><span class="weather-icon" alt="" title=""></span>
       </div>
-      <div class="output-item feels-like">
-        <p class="metric">Feels like</p>
-        <p class="metric-data"></p>
-      </div>
-      <div class="output-item uv-index">
-        <p class="metric">UV Index</p>
-        <p class="metric-data"></p>
-      </div>
-      <div class="output-item wind-speed">
-        <p class="metric">Wind Speed</p>
-        <p class="metric-data"></p></div>
-      <div class="output-item humidity">
-        <p class="metric">Humidity</p>
-        <p class="metric-data"></p>
+      <h3 class="clock">Local time is <span class="local-time"></span></h3>
+      <div class="output">
+        <div class="output-item current-temp">
+          <p class="metric-title">Current Temp</p>
+          <p class="metric-data"></p>
+        </div>
+        <div class="output-item feels-like">
+          <p class="metric">Feels like</p>
+          <p class="metric-data"></p>
+        </div>
+        <div class="output-item uv-index">
+          <p class="metric">UV Index</p>
+          <p class="metric-data"></p>
+        </div>
+        <div class="output-item wind-speed">
+          <p class="metric">Wind Speed</p>
+          <p class="metric-data"></p></div>
+        <div class="output-item humidity">
+          <p class="metric">Humidity</p>
+          <p class="metric-data"></p>
+        </div>
       </div>
     </div>
   </main>
