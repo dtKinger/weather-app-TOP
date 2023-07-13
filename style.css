@@ -134,6 +134,8 @@ main {
 input{
   appearance: none;
   min-height: 3em;
+  border: 2px solid rgb(56, 56, 56);
+  border-radius: 5px;
 }
 
 input::placeholder{
@@ -271,7 +273,7 @@ a:hover{
 .clock {
   font-size: 1em;
   margin-bottom: 30px;
-  justify-content: center;
+  text-align: center;
 }
 
 .local-time {
@@ -315,6 +317,8 @@ a:hover{
 
 #submit {
   margin-bottom: 30px;
+  border-radius: 5px;
+  border: 2px solid rgb(56, 56, 56);
 }
 
 .output-item {

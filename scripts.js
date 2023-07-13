@@ -47,8 +47,12 @@ searchBtn.addEventListener('click', (e) => {
   e.preventDefault();
   let search = searchField.value;
   lastCity = search;
-  fetchWeather(search);
-  FORM.reset(); 
+  if (FORM.checkValidity()){   
+    fetchWeather(search);
+    FORM.reset(); 
+  } else {
+    FORM.reportValidity();
+  }
 })
 
 ////////////
@@ -83,6 +87,8 @@ function renderWeather (response) {
   WEATHER_ICON.innerHTML = `
   <img src="https:${dkWeatherObj.myFormat.conditionIcon}">
   `
+  WEATHER_ICON.setAttribute('alt', `${dkWeatherObj.myFormat.conditionText}`);
+  WEATHER_ICON.setAttribute('title', `${dkWeatherObj.myFormat.conditionText}`);
   setBackgroundImage(dkWeatherObj);
 
   LOCAL_TIME.textContent = `${dkWeatherObj.myFormat.localTime}`;
