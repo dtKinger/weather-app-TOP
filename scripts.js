@@ -33,7 +33,7 @@ async function checkCity () {
     let ipResponse = await fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_DYz26g8fZ1f0JCkR3fPch5oYXO730")
     let ipData = await ipResponse.json();
     let cityToQuery = ipData.location.city.normalize()
-    let guessLocalWeather = await fetch(`http://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${cityToQuery}`, {mode: 'cors'});
+    let guessLocalWeather = await fetch(`https://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${cityToQuery}`, {mode: 'cors'});
     let response = await guessLocalWeather.json()
 
     renderWeather(response);
@@ -65,7 +65,7 @@ searchBtn.addEventListener('click', (e) => {
 async function fetchWeather (search) {
   try {
     
-    const WEATHER_DATA = await fetch(`http://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${search}`, {mode: 'cors'})
+    const WEATHER_DATA = await fetch(`https://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${search}`, {mode: 'cors'})
     let response = await WEATHER_DATA.json()
     lastCity = response.location.name;
     CURRENT_CITY.textContent = `${lastCity}`;
