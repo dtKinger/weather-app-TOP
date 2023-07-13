@@ -17,7 +17,14 @@ div{
 
 
  :root {
-  --background-cloudy: url("camille-couvez-unsplash.jpg");
+
+  --background-cloudy: url("./camille-couvez-unsplash.jpg");
+  --background-partly-cloudy: url("./jessica-irani-cloudy.jpg");
+  --background-sunny: url("./charles-lebegue-unsplash-sunny.jpg");
+  --background-night: url("./sanket-kumbhar-unsplash-night.jpg");
+  --background-rain: url("./valentin-muller-unsplash-rainy.jpg");
+  --background-clear: url("./charles-lebegue-unsplash-sunny.jpg");
+  
 
   --color-bg-primary: ivory;
   --color-bg-secondary: rgb(56, 56, 56);
@@ -65,6 +72,7 @@ body {
   box-sizing: border-box;
   background-image: var(--background-cloudy);
   background-size: cover;
+  text-shadow: 2px 2px black;
 }
 
 h1{
@@ -252,9 +260,14 @@ a:hover{
 
 .current-city {
   font-size: 1.25em;
-  color: greenyellow;
+  color: rgb(218, 255, 71);
+  /* text-shadow: 0px 0px 2px black; */
 }
 
 .weather-item {
   color: red;
+}
+
+.current-weather-title {
+  /* text-shadow: 0px 0px 2px black; */
 }

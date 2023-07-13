@@ -1,9 +1,11 @@
+const BODY = document.querySelector('body');
 const searchBtn = document.querySelector('#submit');
 const searchField = document.querySelector('#search');
 const FORM = document.querySelector('form');
 const OUTPUT = document.querySelector('.output');
 const CURRENT_CITY = document.querySelector('.current-city');
 const newLine = document.createElement('br');
+const CURRENT_WEATHER_TITLE = document.querySelector('.current-weather-title');
 
 const h2 = document.createElement('h2');
 const div = document.createElement('div');
@@ -16,7 +18,8 @@ let lastCity;
 
 async function checkCity () {
   try { 
-    let ipResponse = await fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_DYz26g8fZ1f0JCkR3fPch5oYXO730")
+    // let ipResponse = await fetch("https://geo.ipify.org/api/v2/country,city?apiKey=at_DYz26g8fZ1f0JCkR3fPch5oYXO730")
+    let ipResponse = await fetch(`http://api.weatherapi.com/v1/ip.json?key=2218275108374adfbec63623230807&q=${ipData.location.city}`, {mode: 'cors'})
     let ipData = await ipResponse.json();
     console.log(ipData.location.city)
     console.log(ipData.ip);
@@ -47,12 +50,15 @@ async function fetchWeather (search) {
   try {
     console.log(`${checkCity.guessData}`);
     
+    
     const WEATHER_DATA = await fetch(`http://api.weatherapi.com/v1/current.json?key=2218275108374adfbec63623230807&q=${search}`, {mode: 'cors'})
     let response = await WEATHER_DATA.json()
+    console.log(response);
     lastCity = response.location.name;
     CURRENT_CITY.textContent = `${lastCity}`;
 
     renderWeather(response);
+
     
     } catch (err) {
       handleError(err);
@@ -62,6 +68,44 @@ async function fetchWeather (search) {
  /* ====================  \
 |   HOISTED DECLARATIONS   |
  \  ==================== */
+
+function renderWeather (response) {
+  // Filter the response for items I want
+  let dkWeatherObj = takeSubset(response);
+
+  // Render as needed
+  CURRENT_CITY.textContent = `${dkWeatherObj.myFormat.city}`
+  setBackgroundImage(dkWeatherObj);
+  
+  Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
+    if (entry[1] != ''){ // If it has a value
+      
+      console.log(`${entry[0]}: ${entry[1]}`)
+    }
+  })
+}
+
+function setBackgroundImage (dkWeatherObj) {
+  outer:
+  if (dkWeatherObj.myFormat.isDay == 0){
+    BODY.style.backgroundImage = 'var(--background-night';
+    break outer;
+  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase() == 'clear'){
+    BODY.style.backgroundImage = 'var(--background-clear)';
+  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase() == 'sunny'){
+    BODY.style.backgroundImage = 'var(--background-sunny)';
+  } else if(dkWeatherObj.myFormat.conditionText.toLowerCase() == 'partly cloudy'){
+    BODY.style.backgroundImage = 'var(--background-partly-cloudy)';
+  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase() == 'cloudy' ||
+  dkWeatherObj.myFormat.conditionText.toLowerCase() == 'Overcast') {
+    BODY.style.backgroundImage = 'var(--background-cloudy)';
+  } else if (dkWeatherObj.myFormat.conditionText.toLowerCase() == 'rainy') {
+    BODY.style.backgroundImage = 'var(--background-rainy)';
+  }else {
+
+  };
+};
+
 
 class subSet {
   constructor (city, region, country, localTime, currentTemp, feelsLike, isDay, conditionText, conditionIconPath, cloudCoverage, windKph, precipMm, humidity, uv){
@@ -109,20 +153,6 @@ function takeSubset (response) {
     return { myFormat };
 }
 
-function renderWeather (response) {
-  // Filter the response for items I want
-  let dkWeatherObj = takeSubset(response);
-
-  // Render as needed
-  CURRENT_CITY.textContent = `${dkWeatherObj.myFormat.city}`
-  
-  Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
-    if (entry[1] != ''){ // If it has a value
-      
-      console.log(`${entry[0]}: ${entry[1]}`)
-    }
-  })
-}
 
 // make a safe function with a HOF
 function makeSafe(fn, errorHandler) {
