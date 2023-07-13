@@ -6,6 +6,7 @@ An API project - a weather app for The Odin Project
 - Making API calls to public APIs
 - Giphy/weather APIs
 - Get client's public IP
+- "Loading" animation
 
 ## Reminders:
 - Try/Catch error handling
