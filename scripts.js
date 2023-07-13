@@ -95,7 +95,7 @@ function renderWeather (response) {
   UV.textContent = `${dkWeatherObj.myFormat.uv} / 13`;
   CURRENT_TEMP.textContent = `${dkWeatherObj.myFormat.currentTemp} °C`;
   FEELS_LIKE.textContent = `${dkWeatherObj.myFormat.feelsLike} °C`;
-  WIND_SPEED.textContent = `${dkWeatherObj.myFormat.windKph} kp/h`;
+  WIND_SPEED.textContent = `${dkWeatherObj.myFormat.windKph} kph`;
   HUMIDITY.textContent = `${dkWeatherObj.myFormat.humidity} %`;
   
   // Object.entries(dkWeatherObj.myFormat).forEach((entry) => {
