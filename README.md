@@ -5,7 +5,9 @@ An API project - a weather app for The Odin Project
 - Promises
 - Async/await
 - Making API calls to public APIs
-- Gihpy/weather APIs
+- Giphy/weather APIs
+- Get client's public IP
 
 ## Reminders:
 - Try/Catch error handling
+- Form validation API (.checkValidity(), .reportValidity())
